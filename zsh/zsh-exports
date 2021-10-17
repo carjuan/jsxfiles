@@ -8,7 +8,7 @@ export MANWIDTH=999
 # for zsh viins to work jj 'vi-cmd-mode'
 export KEYTIMEOUT=15
 
-export DOTFILES="$XDG_CONFIG_HOME/nvim"
+export NVIM_DOTFILES="$XDG_CONFIG_HOME/nvim"
 
 export STARSHIP_CONFIG=$XDG_CONFIG_HOME/starship/config.toml
 
