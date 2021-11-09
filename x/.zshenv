@@ -14,3 +14,12 @@ export ZDOTDIR=$HOME/.config/zsh
 HISTFILE="$XDG_DATA_HOME"/zsh/history
 HISTSIZE=1000000
 SAVEHIST=1000000
+
+# ############## LINUX ################################
+# What OS are we running?
+if command apt > /dev/null; then
+	xrandr --output DP-2 --mode 2560x1440 --rate 160 --output DP-0 --mode 2560x1440 --rate 160
+
+	# pactl list short sinks -- lists available audio outputs
+	pactl set-default-sink alsa_output.pci-0000_2d_00.4.analog-stereo
+fi
