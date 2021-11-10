@@ -1,16 +1,16 @@
+# no stow directory path files
+zsh/.config/zsh/plugins
+zsh/.config/zsh/.zcompdump
+nvim/.config/nvim/autoload
+nvim/.config/nvim/themes/colorthemes/*
+
+tmux/plugins
 configstore
 gh
 neofetch
-nvim/autoload
-nvim/themes/colorthemes/*
 .zsh_history
 .zsh_sessions
 zsh/plugins
 zsh/.zcompdump
 terminfo
 
-# no stow directory path files
-zsh/.config/zsh/plugins
-zsh/.config/zsh/.zcompdump
-
-tmux/plugins
