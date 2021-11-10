@@ -52,3 +52,8 @@ alias gss='git status -s'
 alias gs='echo ""; echo "*********************************************"; echo -e "   DO NOT FORGET TO PULL BEFORE COMMITTING"; echo "*********************************************"; echo ""; git status'
 alias gr='git remote'
 alias grv='git remote -v'
+
+# ########## LINUX ONLY ALIAS ###############
+# Change default audio output
+alias output-astro='pactl set-default-sink alsa_output.usb-Astro_Gaming_Astro_A50-00.analog-stereo'
+alias output-speakers='pactl set-default-sink alsa_output.pci-0000_2d_00.4.analog-stereo'
