@@ -1,5 +1,5 @@
 
-hi! Normal guibg=NONE ctermbg=NONE
+" hi! Normal guibg=NONE ctermbg=NONE
 
 " =========== THEME SPECIFICS ===================
 "
