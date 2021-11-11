@@ -3,7 +3,9 @@
 # -0 Change xargs to expect NUL (``\0'') characters as separators, instead of spaces and newlines.  This is expected to be used in concert with the -print0 function in find(1).
 # -print0 this primary always evaluates to true.  It prints the pathname of the current file to standard output, followed by an ASCII NUL character (character code 0).
 alias zsh-update-plugins="find "$ZDOTDIR/plugins" -type d -exec test -e '{}/.git' ';' -print0 | xargs -I dirpath -0 git -C dirpath pull -q"
-alias ll='ls -Gal'
+
+# ls color output -G for osx and --color=auto for linux
+ls --color=auto &> /dev/null && alias ll='ls --color=auto -hAlt' || alias ll='ls -GhAlt'
 
 # confirm before overwriting sm
 alias rm='rm -i'
