@@ -51,7 +51,7 @@ function apply_default_prompt() {
 
 
 if ! command -v starship &>/dev/null; then 
-    apply_default_prompt
+  apply_default_prompt
 else      
   apply_starship_prompt
 fi
