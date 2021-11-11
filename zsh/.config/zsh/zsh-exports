@@ -17,7 +17,7 @@ export XDG_DATA_HOME=$HOME/.local/share
 # zsh config dir
 export ZDOTDIR=$HOME/.config/zsh
 
-HISTFILE="$XDG_DATA_HOME"/zsh/history
+HISTFILE="$XDG_DATA_HOME"/zsh/history/.zsh_history
 HISTSIZE=1000000
 SAVEHIST=1000000
 
