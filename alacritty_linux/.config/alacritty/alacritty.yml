@@ -104,17 +104,16 @@ window:
 # Font configuration
 font:
   normal:
-    family: Hack Nerd Font
+    family: JetBrains Mono
   bold:
-    family: Hack Nerd Font
+    family: JetBrains Mono
   italic:
-    family: Hack Nerd Font
-    # style: Italic
+    family: JetBrains Mono
   bold_italic:
-    family: Hack Nerd Font
+    family: JetBrains Mono
 
   # Point size
-  size: 16.0
+  size: 11.0
 
   ligatures: true
 
