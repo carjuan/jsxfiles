@@ -60,8 +60,6 @@ zsh_install_plugin "rupa/z"
 # bindkey "^j" down-line-or-beginning-search # Down
 
 bindkey '^F' autosuggest-accept
-# FZF source
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 compinit
 
@@ -77,3 +75,6 @@ compinit
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# FZF source
+[ -f "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh ] && source "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh
