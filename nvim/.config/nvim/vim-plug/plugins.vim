@@ -79,6 +79,9 @@ Plug 'mattn/emmet-vim'
 
 Plug 'windwp/nvim-autopairs'
 
+" Sessions
+Plug 'tpope/vim-obsession'
+
 
 " All of your Plugins must be added before the following line
 call plug#end()

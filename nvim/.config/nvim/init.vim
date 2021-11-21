@@ -36,7 +36,7 @@ set conceallevel=0              " So that I can see `` in markdown files"
 set expandtab                   " Convert tabs to spaces
 set autoindent                  " Good auto indent
 " set cursorline                  " Enable highlighting of the current line
-set clipboard=unnamed
+set clipboard=unnamedplus
 set showcmd
 " set showmatch
 set sw=2
