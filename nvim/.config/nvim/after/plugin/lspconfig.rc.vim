@@ -196,6 +196,7 @@ nvim_lsp.diagnosticls.setup {
       json = 'prettier',
       scss = 'prettier',
       html = 'prettier',
+      css = 'prettier',
       less = 'prettier',
       typescript = 'eslint_d',
       typescriptreact = 'eslint_d',
