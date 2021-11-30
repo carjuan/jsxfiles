@@ -25,7 +25,7 @@ set nowrap                      " Display long lines as just one line
 set smartcase
 set noswapfile
 set incsearch
-set nohlsearch
+set hlsearch!                   " Changes state of hlsearch to off
 set tabstop=2
 set softtabstop=2
 set mouse=a                     " Enable your mouse 
