@@ -3,7 +3,7 @@
 apps=(
   "alacritty"
   "brave-browser"
-  "brave-browser --new-window https://notion.so"
+  "brave-browser --new-window https://notion.so https://calendar.google.com/calendar/u/O/r"
   "spotify"
 )
 
