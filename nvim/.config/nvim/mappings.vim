@@ -32,7 +32,7 @@ nnoremap <Leader>nh :noh<CR>
 " command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 command! -nargs=* -bar -bang -count=0 -complete=dir	Vex	call netrw#Explore(<count>,1,4+<bang>0,<q-args>)
 command! -nargs=0 So :source  
-command! -nargs=0 -bar -count=0 -complete=dir Rlua :w | :luafile %
+command! -nargs=0 -bar -bang -count=0 Rlua :w | :luafile %
 nnoremap <Leader>rl :Rlua<CR>
 nnoremap <Leader>nvim :vsp $iOME/.config/nvim/init.vim<CR>
 nnoremap <Leader>ip :PlugInstall<CR>
