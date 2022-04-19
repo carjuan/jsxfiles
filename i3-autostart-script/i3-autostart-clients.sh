@@ -1,10 +1,11 @@
 #!/bin/bash
 
 apps=(
-  "alacritty"
-  "brave-browser"
-  "brave-browser --new-window https://notion.so https://calendar.google.com/calendar/u/O/r"
+  "alacritty -e htop" 
+  "firefox"
+  "firefox https://notion.so https://calendar.google.com/calendar/u/O/r"
   "spotify"
+  "alacritty"
 )
 
 arrayLength=${#apps[@]}
