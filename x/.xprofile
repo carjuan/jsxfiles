@@ -1,3 +1,5 @@
-xrandr --output DP-2 --mode 2560x1440 --rate 160 --output DP-0 --mode 2560x1440 --rate 160
+xrandr --output DP-0 --mode 2560x1440 --rate 160
+xrandr --output DP-2 --mode 2560x1440 --rate 160
+xrandr --output DP-2 --rotate right --rate 160
+
 pactl set-default-sink alsa_output.pci-0000_2d_00.4.analog-stereo
-xrandr --output DP-2 --rotate right --auto
