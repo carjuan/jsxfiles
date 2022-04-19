@@ -66,7 +66,7 @@ Plug 'hrsh7th/cmp-nvim-lua'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/vim-vsnip'
 " Provides symbols/icons to LSP completion (nvim-cmp) sources
-Plug 'onsails/lspkind-nvim'
+Plug 'onsails/lspkind.nvim'
 "Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'hrsh7th/cmp-path'
 " Making plugins
