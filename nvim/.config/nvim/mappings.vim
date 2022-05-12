@@ -39,6 +39,7 @@ nnoremap <Leader>ip :PlugInstall<CR>
 nnoremap <Leader>db :bdelete<CR>
 nnoremap <Leader>rif :w <Bar> so %<CR>
 nnoremap <Leader>rjs :w <Bar> !node %<CR>
+nnoremap <Leader>rs :w <Bar> !./%
 
 " Get absolute path of current file
 nnoremap <Leader>. :echo expand('%:p')<CR>

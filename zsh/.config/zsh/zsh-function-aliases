@@ -1,0 +1,10 @@
+# Cheat sheet
+# info http://cht.sh
+#alias cheat="curl cheat.sh/ "
+
+function cheat() {
+  local _search="$1"
+
+  curl cheat.sh/"${_search}"
+
+}

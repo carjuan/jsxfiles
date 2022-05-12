@@ -140,6 +140,20 @@ nvim_lsp.tsserver.setup{
   },
 }
 
+nvim_lsp.bashls.setup{
+  on_attach = on_custom_attach,
+  filetypes = {'sh'},
+  handlers = {
+    ["textDocument/publishDiagnostics"] =  vim.lsp.with(
+      vim.lsp.diagnostic.on_publish_diagnostics, {
+        underline = false,
+        -- This sets the spacing and the prefix, obviously.
+        signs = false
+      }
+    )
+  },
+}
+
 -- Enable (broadcasting) snippet capability for completion
 --local capabilities = vim.lsp.protocol.make_client_capabilities()
 --capabilities.textDocument.completion.completionItem.snippetSupport = true
