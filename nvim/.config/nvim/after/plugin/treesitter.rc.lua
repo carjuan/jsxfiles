@@ -1,7 +1,7 @@
 
 local ts = require'nvim-treesitter.configs'
 ts.setup { 
-  ensure_installed = 'maintained',
+  ensure_installed = 'all',
   highlight = { 
     enable = true,
     disable = { "html" }, -- list of languages that will be disabled

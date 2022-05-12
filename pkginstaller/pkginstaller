@@ -1,0 +1,379 @@
+#!/usr/bin/env bash
+
+# TODO: provide a loading progress bar
+
+__dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+__file="${__dir}/$(basename "${BASH_SOURCE[0]}")"
+
+
+usage() {
+  cat >&2 <<EOF
+Installs npm/apt/brew packages globally given a .txt file 
+
+USAGE:
+    pkginstaller [FLAGS] [OPTIONS]
+
+FLAGS: 
+    -i, --Install           Install packages globally
+    -1, --quiet             Disable progress output
+    -u, --update-pkg        Update npmpackagelist file with new <npm> packages installed globally
+EOF
+}
+
+say() {
+  echo ""
+  printf 'pkginstaller: %s\n' "$1"
+}
+
+err() {
+  say "$1" >&2 
+  echo "---" >&2
+  echo "See pkginstaller --usage for more info"
+  exit 1
+}
+
+need_cmd() {
+  if ! check_cmd "$1"; then err "need '$1' (command not found)"; fi
+}
+
+check_cmd() {
+  command -v "$1" > /dev/null 2>&1
+}
+
+# Run a command that should never fail. If the command fails execution
+# will immediately terminate with an error showing the failing
+# command.
+ensure() {
+  # without double brackets, executes command 
+  if ! "$@"; then err "command failed: $*"; fi
+}
+
+
+create_temp_npm_global_installed_packages_dir() {
+
+  local _temp_dir="$1"
+  local _temp_file="$2"
+
+  npm list -g --parseable | 
+  awk -F'/' '{print $NF}' | 
+  grep -v "lib$" > "$_temp_dir/$_temp_file"
+
+}
+
+
+update_npm_pkg() {
+
+  local _dir="$(ensure mktemp -d)"
+  local _tempfile="temp_npm_global.txt"
+
+  if [[ ! "$_dir" || ! -d "$_dir" ]]; then
+    err "temp dir could be created"
+    exit 1
+  fi
+
+  create_temp_npm_global_installed_packages_dir "$_dir" "$_tempfile"
+  compare_global_with_local_pkgs "${_dir}" "${_tempfile}"
+
+  echo "temp dir created: "$_dir""
+
+  trap "{ rm -rf $_dir; echo 'temp dir removed'; exit 0; }" EXIT
+}
+
+
+dump_npm_pkg() {
+
+  npm list -g --parseable | 
+  awk -F'/' '{print $NF}' | 
+  grep -v "lib$" > "$PACKAGES_LIST_PATH"
+}
+
+
+is_var_set() {
+  local _var="$1"
+
+  [[ -z "$_var" ]] && return 1 || return 0
+
+}
+
+
+are_valid_config_options() {
+
+  for i in "${!config[@]}";
+  do
+    local _config_key="$i"
+    local _config_value=${config[$i]}
+
+    if [[  $_config_key == *"file"* ]]; then
+      is_valid_file "$_config_value"
+    else
+      case "$_config_value" in 
+        brew| apt| npm| update| install)
+          ;;
+        *)
+          err "Uknown option: $_config_value"
+          ;;
+      esac
+    fi
+
+  done
+}
+
+
+is_valid_file_extension() {
+  local _filename="$1"
+  local _supported_extensions=(".txt" "Brewfile")
+
+  for ext in ${_supported_extensions[@]}; 
+  do
+    case "$ext" in 
+      *.txt | Brewfile)
+        return 0
+      ;;
+      *)
+        return 1
+      ;;
+    esac
+  done
+}
+
+
+expand_tilde_in_path() {
+  local _path="$1"
+  local _tilde_expanded="${_path/#\~/$HOME}"
+  echo "${_tilde_expanded}"
+}
+
+
+is_valid_file() {
+  local _path="$1"
+  local _dirname="$(dirname $_path)"
+  local _absolute_path=""
+  local _absolute_path_to_file=""
+  if [[ $_path == *"~"* ]]; then
+    _absolute_path_to_file="$(expand_tilde_in_path $_path)"
+  else
+    _absolute_path_to_file="$(cd $_dirname; pwd)/$(basename $_path)"
+  fi
+
+  if [ ! -s "$_absolute_path_to_file" ]; then
+    err "File: '$_absolute_path_to_file' not found or file size is zero"
+  fi
+
+  if ! is_valid_file_extension "$_absolute_path_to_file"; then
+    err "Uknown extension: \"${_path##*.}\" for file \"$(basename $_path)\""
+  fi
+  config[user_file_provided]="${_absolute_path_to_file}"
+}
+
+
+build_npm_cmd() {
+  if [[ ${config[action]} = "install" ]]; then
+    config[pkg_manager]="npm -g"
+  fi
+}
+
+
+brew_update_file() {
+  local _file=${config[user_file_provided]}
+  brew bundle dump --force --file="${_file}"
+}
+
+
+brew_install() {
+  local _file=${config[user_file_provided]}
+  brew bundle install --file="${_file}"
+}
+
+
+# Could of use <diff command>? <fileA> <fileB>
+get_packages() {
+  local _cmd=${config[pkg_manager]}
+  local _action=${config[action]}
+  local _reference_pkg=${config[reference_pkg_list]}
+  local _target_pkg_list=${config[target_pkg_list]}
+  local _packages=""
+
+  while read package;
+  do
+    if ! grep -Fxq "$package" < "$_target_pkg_list" 2>&1; then
+      _packages+=" $package"
+    fi
+  done < $_reference_pkg
+
+  # trim leading whitespace
+  local _formatted_packages="$(echo "$_packages" | xargs )"
+
+
+  if [[ ! $_packages ]]; then 
+    say "No packages were found to $_action"
+    exit 0
+  fi
+  
+  config[_packages]="$_formatted_packages"
+}
+
+
+# Based on $action, initialize reference_pkg 
+# and system-pkg
+create_reference_and_system_pkg_paths() {
+
+  local _action=${config[action]}
+
+
+  local _dir="$(ensure mktemp -d)"
+  local _pkg_manager=${config[pkg_manager]}
+  local _tempfile="temp_${_pkg_manager}_global.txt"
+
+  if [[ ! "$_dir" || ! -d "$_dir" ]]; then
+    err "temp dir could be created"
+    exit 1
+  fi
+
+  create_temp_npm_global_installed_packages_dir "$_dir" "$_tempfile"
+
+  # temp dir and file to dump already installed pkgs 
+  # by <pkg-manager> in host system
+  local system_already_installed_pkgs_path="${_dir}/${_tempfile}"
+
+  if [ "$_action" == "update" ]; then
+    config[reference_pkg_list]="${system_already_installed_pkgs_path}"
+    config[target_pkg_list]=${config[user_file_provided]}
+  else
+    # it is <install> action - then reference should be
+    # path provided by user
+    config[reference_pkg_list]=${config[user_file_provided]}
+    config[target_pkg_list]="${system_already_installed_pkgs_path}"
+  fi
+  
+  trap "{ rm -rf $_dir; say 'temp dir removed'; exit 0; }" EXIT
+
+}
+
+
+update_pkgs() {
+  for pkg in ${config[_packages]}; do
+    echo "${pkg}" | tee -a ${config[target_pkg_list]} &> /dev/null
+  done
+
+  sort -o ${config[target_pkg_list]} ${config[target_pkg_list]}
+}
+
+
+install_pkgs() {
+
+  local _packages_to_install=${config[_packages]}
+
+  for pkg in "$@"; do
+    if ! ${config[pkg_manager]} info "$pkg" > /dev/null 2>&1; then err "$pkg not a valid package"; fi
+  done
+  
+  ${config[pkg_manager]} ${config[action]} ${config[_packages]}
+
+}
+
+
+main() {
+  need_cmd rmdir
+  need_cmd rm
+  need_cmd mkdir
+  need_cmd mktemp
+  # -n makes the variable passed by reference
+  # $1 makes it passed by reference
+  local -n config_ref="$1"
+
+  create_reference_and_system_pkg_paths
+  get_packages
+ 
+  case ${config_ref[pkg_manager]} in
+    brew)
+      # check if Xcode toos are installed
+      need_cmd brew
+
+      local brew_action=${config_ref[action]}
+
+      if [[ "$brew_action" = "update" ]]; then
+        brew_update_file
+      else
+        brew_install
+      fi
+      ;;
+  
+    npm)
+      need_cmd node
+      need_cmd npm
+      
+      # Builds "npm -g" provided action is "install"
+      build_npm_cmd
+
+      if [ ${config[action]} == "install" ]; then
+        install_pkgs ${config[_packages]}
+      else
+        update_pkgs ${config[_packages]}
+      fi
+      ;;
+
+    apt)
+      need_cmd apt
+      ;;
+  
+  esac
+}
+
+
+declare -A config
+
+# if not set, set to empty string
+config[pkg_manager]=${config[pkg_manager]:-''}
+config[action]=${config[action]:-''}
+config[user_file_provided]=${config[user_file_provided]:-''}
+
+# TODO: sanity checks
+# 1. Arguments are well formatted and not duplicates
+# 2. Arguments are valid brew/apt/npm install/update /path/sample
+# can provide different paths using '~/' '$VAR' '/Users/...'
+for arg in "$@"; do
+  case "$arg" in
+    -pm=*| --pkg-manager=*)
+
+      # True if length of string is zero
+      if [ -z ${config[pkg_manager]} ]; then
+        config[pkg_manager]="${arg#*=}"
+      else
+        err "No duplicate options: ${arg}"
+      fi
+      ;;
+  
+    -f=*| --file=*)
+      if [ -z ${config[user_file_provided]} ]; then
+        config[user_file_provided]="${arg#*=}"
+      else
+        err "No duplicate options: ${arg}"
+      fi
+      ;;
+  
+    -a*| --action=*)   
+      if [ -z ${config[action]} ]; then
+        config[action]="${arg#*=}"
+      else
+        err "No duplicate options: ${arg}"
+      fi
+      ;;
+
+    -*| --*| *)
+      err "Unknown option: $arg, see --usage for more information"
+        ;;
+  esac  
+done 
+
+are_valid_config_options config
+
+# TODO:
+# Check for bash version 4.3+ to run this script
+# something like bash --version > 4.3? run script
+# -----------------------------------------------
+
+main config # 2> /dev/null
+
+# --------- Debugging config ---------------
+# echo -e "\n Current state of options ----> \n"
+# declare -p config

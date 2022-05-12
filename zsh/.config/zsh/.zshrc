@@ -38,8 +38,9 @@ is_zsh_history
 # Source normal files 
 zsh_source_file "zsh-exports"
 zsh_source_file "zsh-aliases"
- zsh_source_file "zsh-prompt"
+zsh_source_file "zsh-prompt"
 zsh_source_file "zsh-vim-mode"
+zsh_source_file "zsh-function-aliases"
 
 # Plugin Manager
 zsh_install_plugin "zsh-users/zsh-autosuggestions"
