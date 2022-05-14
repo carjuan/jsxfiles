@@ -19,7 +19,6 @@ set number                      " Line numbers"
 set encoding=utf-8
 set fileencoding=utf-8
 
-set laststatus=2                " Always display the status line 
 
 set nowrap                      " Display long lines as just one line
 set smartcase
@@ -57,7 +56,7 @@ set smartcase
 set confirm 
 set cmdheight=2   " More space for displaying messages
 set signcolumn=yes
-set laststatus=2
+set laststatus=3                " Always display the status line 
 set hidden      " Required to keep multiple buffers open multiple buffers
 set shiftwidth=2                " Change the number of space characters inserted for indentation
 
@@ -65,6 +64,7 @@ set shortmess+=c        " 	  c	don't give |ins-completion-menu| messages.  For e
                         "-- XXX completion (YYY)", "match 1 of 2", "The only match",
                         "Pattern not found", "Back at original", etc.
 
+set nohlsearch
 
 " ======================== Set Python 3 provider ================
 
