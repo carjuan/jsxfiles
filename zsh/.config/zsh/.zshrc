@@ -78,3 +78,5 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 
 # FZF source
 [ -f "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh ] && source "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh
+# FZF key-bindings
+[ -f "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/key-bindings.zsh ] && source "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/key-bindings.zsh
