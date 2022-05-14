@@ -46,8 +46,9 @@ export MANWIDTH=999
 # ############## OS Specifics ####################
 
 # Causes issues in Linux +Man, Man page exited with code 127
-if ! command -v apt > /dev/null; then 
+if command -v apt > /dev/null; then 
 	export MANPAGER='vim +Man!'
-  nvidia-settings -a '[gpu:0]/GPUFanControlState=1'
-  nvidia-settings -a '[fan]/GPUTargetFanSpeed=50'
+  nvidia-settings -a '[gpu:0]/GPUFanControlState=1' > /dev/null
+  nvidia-settings -a '[fan]/GPUTargetFanSpeed=50' > /dev/null
+  dropbox start &> /dev/null
 fi
