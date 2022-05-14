@@ -28,6 +28,9 @@ export KEYTIMEOUT=15
 
 export NVIM_DOTFILES="$XDG_CONFIG_HOME/nvim"
 
+
+export PATH=$HOME/.dotnet/tools:$PATH
+
 export STARSHIP_CONFIG=$XDG_CONFIG_HOME/starship/config.toml
 
 # helps TMUX display proper LS dircolors when -G flag is passed
