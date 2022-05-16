@@ -1,0 +1,17 @@
+#!/bin/sh
+
+# Causes issues in Linux +Man, Man page exited with code 127
+if command -v apt > /dev/null;
+then 
+	export MANPAGER='vim +Man!'
+  nvidia-settings -a '[gpu:0]/GPUFanControlState=1' &> /dev/null
+  nvidia-settings -a '[fan]/GPUTargetFanSpeed=50' &> /dev/null
+fi
+
+if command -v apt && (pgrep tmux >/dev/null && ! pgrep dropbox &>/dev/null);
+then
+  tmux rename-window running-dropbox &>/dev/null
+  dropbox start &>/dev/null
+else
+  echo "No need to restart dropbox or this is apt is not valid pkg isntalle in this system"
+fi
