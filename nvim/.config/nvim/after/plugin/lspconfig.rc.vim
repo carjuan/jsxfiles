@@ -128,6 +128,7 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 nvim_lsp.tsserver.setup{
   -- on_attach_wrapper disables formatting for a lan server
+  capabilities = capabilities,
   on_attach = disable_formatting,
   filetypes = {'javascript', 'typescript', 'typescriptreact', 'typescript.tsx' },
   -- if handlers is enable, customizes diagnositcs in buffer, disables icons and underline
@@ -143,6 +144,7 @@ nvim_lsp.tsserver.setup{
 }
 
 nvim_lsp.bashls.setup{
+  capabilities = capabilities,
   on_attach = on_custom_attach,
   filetypes = {'sh'},
   handlers = {
@@ -164,6 +166,7 @@ nvim_lsp.bashls.setup{
 -- capabilities = capabilities,
 --}
 nvim_lsp.diagnosticls.setup {
+  capabilities = capabilities,
   on_attach = on_custom_attach,
   filetypes = { 'javascript', 'javascriptreact', 'json', 'typescript', 'typescriptreact', 'less', 'markdown', 'html' },
   init_options = {
