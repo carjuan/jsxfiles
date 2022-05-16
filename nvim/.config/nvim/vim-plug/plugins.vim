@@ -46,7 +46,6 @@ Plug 'tpope/vim-rhubarb'
 
 " =============== LSP config =================
 Plug 'neovim/nvim-lspconfig'
-Plug 'glepnir/lspsaga.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/playground'
 Plug 'folke/trouble.nvim'

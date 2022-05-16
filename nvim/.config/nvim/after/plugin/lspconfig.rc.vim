@@ -42,14 +42,16 @@ local on_custom_attach = function(client, bufnr)
   -- see `:h vim.lsp.*` for documentation on any of the functions below
   buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
   buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  --buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  -- buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  vim.keymap.set("n", "K", vim.lsp.buf.hover, {buffer=0}, opts)
+  buf_set_keymap('n', '<leader>fd', '<cmd>Telescope diagnostics<CR>', opts)
   buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
   --buf_set_keymap('i', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
   buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
   buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
   buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-  buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-  --buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+  buf_set_keymap('n', 'gt', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+  buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
   buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
   buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
   buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
@@ -126,6 +128,7 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 nvim_lsp.tsserver.setup{
   -- on_attach_wrapper disables formatting for a lan server
+  capabilities = capabilities,
   on_attach = disable_formatting,
   filetypes = {'javascript', 'typescript', 'typescriptreact', 'typescript.tsx' },
   -- if handlers is enable, customizes diagnositcs in buffer, disables icons and underline
@@ -141,6 +144,7 @@ nvim_lsp.tsserver.setup{
 }
 
 nvim_lsp.bashls.setup{
+  capabilities = capabilities,
   on_attach = on_custom_attach,
   filetypes = {'sh'},
   handlers = {
@@ -162,6 +166,7 @@ nvim_lsp.bashls.setup{
 -- capabilities = capabilities,
 --}
 nvim_lsp.diagnosticls.setup {
+  capabilities = capabilities,
   on_attach = on_custom_attach,
   filetypes = { 'javascript', 'javascriptreact', 'json', 'typescript', 'typescriptreact', 'less', 'markdown', 'html' },
   init_options = {

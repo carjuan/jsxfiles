@@ -65,6 +65,7 @@ set shortmess+=c        " 	  c	don't give |ins-completion-menu| messages.  For e
                         "Pattern not found", "Back at original", etc.
 
 set nohlsearch
+set foldmethod=syntax
 
 " ======================== Set Python 3 provider ================
 
