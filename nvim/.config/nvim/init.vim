@@ -132,7 +132,12 @@ so $HOME/.config/nvim/mappings.vim
 lua << EOF
 
 local utils = require'utils'
+local _g  = vim.g
+
+-- _g.OmniSharp_start_server = 0
+_g.OmniSharp_highlighting = 0
 --local util = require'utils/map'
+_g.vimspector_enable_mappings = 'HUMAN'
 
 -- TODO: rename _inspect 
 -- wrapper for inspecting lua tables
