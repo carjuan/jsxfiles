@@ -8,3 +8,9 @@ function cheat() {
   curl cheat.sh/"${_search}"
 
 }
+
+function ts() {
+  local _session="$1"
+
+  tmux switch-client -t "${_session}"
+}
