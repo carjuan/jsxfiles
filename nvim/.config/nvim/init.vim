@@ -17,7 +17,7 @@ set noerrorbells
 set number                      " Line numbers" 
 
 set encoding=utf-8
-set fileencoding=utf-8
+
 
 
 set nowrap                      " Display long lines as just one line
@@ -66,6 +66,10 @@ set shortmess+=c        " 	  c	don't give |ins-completion-menu| messages.  For e
 
 set nohlsearch
 set foldmethod=syntax
+
+" Stop auto commenting
+set formatoptions-=cro
+
 
 " ======================== Set Python 3 provider ================
 
