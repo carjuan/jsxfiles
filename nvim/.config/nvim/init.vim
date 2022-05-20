@@ -73,7 +73,7 @@ set formatoptions-=cro
 
 " ======================== Set Python 3 provider ================
 
-let g:python3_host_prog="/usr/local/bin/python3" 
+let g:python3_host_prog="/usr/bin/python3" 
 
 
 " ======================= Disable Python 2 plugin support ========
