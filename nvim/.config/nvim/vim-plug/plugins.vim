@@ -42,6 +42,7 @@ Plug 'junegunn/gv.vim'
 " signify changes in Git file tracked files
 Plug 'mhinz/vim-signify'
 Plug 'tpope/vim-rhubarb'
+Plug 'sindrets/diffview.nvim'
 " =============================================
 
 " =============== LSP config =================
@@ -50,6 +51,9 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/playground'
 Plug 'folke/trouble.nvim'
 " ============================================
+"
+" =============== C# =========================
+Plug 'OmniSharp/omnisharp-vim'
 
 " ================ Telescope ================
 Plug 'nvim-lua/popup.nvim'
@@ -70,6 +74,10 @@ Plug 'onsails/lspkind.nvim'
 Plug 'hrsh7th/cmp-path'
 " Making plugins
 Plug 'tpope/vim-scriptease'
+
+" Debugger
+Plug 'puremourning/vimspector'
+
 
 " Typing
 Plug 'tpope/vim-surround'

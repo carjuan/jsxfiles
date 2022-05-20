@@ -1,12 +1,12 @@
-if !exists('g:lspconfig')
-  finish
-endif
-
-lua << EOF
 local nvim_lsp = require('lspconfig')
 local protocol = require('vim.lsp.protocol')
+local home = os.getenv('HOME')
+local luaserver = require('lsp_lua')
+local sumneko_lua = luaserver()
+local pid = vim.fn.getpid()
 
--- TODO: require a wrapper for cmp and update capabilities in TSSERVER 
+
+-- TODO: require a wrapper for cmp and update capabilities in TSSERVER
 --require'cmp'.setup {
 --  sources = {
 --    { name = 'nvim_lsp' }
@@ -22,43 +22,54 @@ local protocol = require('vim.lsp.protocol')
 --  capabilities = capabilities,
 --}
 
-
-
 -- Use an on_custom_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_custom_attach = function(client, bufnr)
 
+  local opts = { noremap = true, silent = true }
   -- (...) works similar to Rest operator in JS
   -- Collects all arguments under ... or use variable arg to use table as arguments
-  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+  -- local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
   -- Enable completion triggered by <c-x><c-o>
   buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-  -- Mappings
-  local opts= { noremap = true, silent = true }
 
   -- see `:h vim.lsp.*` for documentation on any of the functions below
-  buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-  buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  -- buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  vim.keymap.set("n", "K", vim.lsp.buf.hover, {buffer=0}, opts)
-  buf_set_keymap('n', '<leader>fd', '<cmd>Telescope diagnostics<CR>', opts)
-  buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-  --buf_set_keymap('i', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-  buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
-  buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-  buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-  buf_set_keymap('n', 'gt', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-  buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-  buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-  buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
-  --buf_set_keymap('n', '<C-j>', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-  buf_set_keymap('n', '<S-C-j>', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-  buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-  buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+
+  vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
+  vim.keymap.set('n', 'dN', vim.diagnostic.goto_prev, opts)
+  vim.keymap.set('n', 'dn', vim.diagnostic.goto_next, opts)
+  vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
+
+  -- find diagnostics for current buffer only
+  vim.keymap.set('n', 'da', function()
+    require('telescope.builtin').diagnostics({ bufnr = 0 })
+    print("Showed diagnostics for current buffer only")
+  end, opts)
+
+  -- find diagnostics for workspace <cwd>
+  vim.keymap.set('n', 'dA', function()
+    require('telescope.builtin').diagnostics()
+    print("Showed diagnostics for current buffer only")
+  end, opts)
+
+  vim.keymap.set('n', 'fr', '<cmd>Telescope lsp_references<CR>', opts)
+  vim.keymap.set('n', 'fd', '<cmd>Telescope lsp_definitions<CR>', opts)
+  vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
+  vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = 0 }, opts)
+  vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
+  vim.keymap.set('i', '<C-k>', vim.lsp.buf.signature_help, opts)
+  vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, opts)
+  vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, opts)
+  vim.keymap.set('n', '<space>wl', vim.lsp.buf.list_workspace_folders, opts)
+  vim.keymap.set('n', 'gt', vim.lsp.buf.type_definition, opts)
+  vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
+  vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, opts)
+  vim.keymap.set('n', '<space>q', vim.lsp.diagnostic.set_loclist, opts)
+  vim.keymap.set("n", "ff", vim.lsp.buf.formatting, opts)
 
   --formatting
   if client.resolved_capabilities.document_formatting then
@@ -109,16 +120,16 @@ end
 -- this function needs to be attached to on_attach in client config
 -- using diagnosticls for formatting file
 local disable_formatting = function(client, bufnr)
-  
+
   -- set file extension
   local file_extension = 'js'
   -- gets file extension for current <%>file
   local current_buf_file_extension = vim.fn.expand('%:e')
-  
-  
+
+
 
   if current_buf_file_extension == file_extension then
-    client.resolved_capabilities.document_formatting = false    
+    client.resolved_capabilities.document_formatting = false
   end
 
   on_custom_attach(client, bufnr)
@@ -126,38 +137,70 @@ end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
-nvim_lsp.tsserver.setup{
+nvim_lsp.tsserver.setup {
   -- on_attach_wrapper disables formatting for a lan server
   capabilities = capabilities,
   on_attach = disable_formatting,
-  filetypes = {'javascript', 'typescript', 'typescriptreact', 'typescript.tsx' },
+  filetypes = { 'javascript', 'typescript', 'typescriptreact', 'typescript.tsx' },
   -- if handlers is enable, customizes diagnositcs in buffer, disables icons and underline
   handlers = {
-    ["textDocument/publishDiagnostics"] =  vim.lsp.with(
+    ["textDocument/publishDiagnostics"] = vim.lsp.with(
       vim.lsp.diagnostic.on_publish_diagnostics, {
-        underline = false,
-        -- This sets the spacing and the prefix, obviously.
-        signs = false
-      }
+      underline = false,
+      -- This sets the spacing and the prefix, obviously.
+      signs = false
+    }
     )
   },
 }
 
-nvim_lsp.bashls.setup{
+nvim_lsp.omnisharp.setup {
   capabilities = capabilities,
   on_attach = on_custom_attach,
-  filetypes = {'sh'},
+  cmd = { string.format("%s/.cache/omnisharp-vim/omnisharp-roslyn/run", home), "--languageserver", "--hostPID", tostring(pid) },
+}
+
+nvim_lsp.bashls.setup {
+  capabilities = capabilities,
+  on_attach = on_custom_attach,
+  filetypes = { 'sh' },
   handlers = {
-    ["textDocument/publishDiagnostics"] =  vim.lsp.with(
+    ["textDocument/publishDiagnostics"] = vim.lsp.with(
       vim.lsp.diagnostic.on_publish_diagnostics, {
-        underline = false,
-        -- This sets the spacing and the prefix, obviously.
-        signs = false
-      }
+      underline = false,
+      -- This sets the spacing and the prefix, obviously.
+      signs = false
+    }
     )
   },
 }
 
+
+nvim_lsp.sumneko_lua.setup {
+  capabilities = capabilities,
+  on_attach = on_custom_attach,
+  cmd = { sumneko_lua.binary, "-E", sumneko_lua.root_path .. "/main.lua" },
+  settings = {
+    Lua = {
+      runtime = {
+        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+        version = 'LuaJIT',
+        -- Setup your lua path
+        path = vim.split(package.path, ';')
+      },
+      diagnostics = {
+        enable = true,
+        -- Get the language server to recognize the `vim` global
+        globals = { 'vim' }
+      },
+      workspace = {
+        -- Make the server aware of Neovim runtime files
+        library = { [vim.fn.expand('$VIMRUNTIME/lua')] = true, [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true },
+        preloadFileSize = 400,
+      }
+    }
+  }
+}
 -- Enable (broadcasting) snippet capability for completion
 --local capabilities = vim.lsp.protocol.make_client_capabilities()
 --capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -219,7 +262,6 @@ nvim_lsp.diagnosticls.setup {
       less = 'prettier',
       typescript = 'eslint_d',
       typescriptreact = 'eslint_d',
-      json = 'prettier',
       markdown = 'prettier',
     }
   }
@@ -230,14 +272,12 @@ nvim_lsp.diagnosticls.setup {
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
-    underline = false,
-    -- This sets the spacing and the prefix, obviously.
-    signs = false,
-    virtual_text = {
-      spacing = 4,
-      prefix = ''
-    }
+  underline = false,
+  -- This sets the spacing and the prefix, obviously.
+  signs = false,
+  virtual_text = {
+    spacing = 4,
+    prefix = ''
   }
+}
 )
-
-EOF

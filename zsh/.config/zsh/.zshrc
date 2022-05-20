@@ -37,6 +37,7 @@ is_zsh_history
 
 # Source normal files 
 zsh_source_file "zsh-exports"
+zsh_source_file "zsh-exec"
 zsh_source_file "zsh-aliases"
 zsh_source_file "zsh-prompt"
 zsh_source_file "zsh-vim-mode"
@@ -80,3 +81,5 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 [ -f "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh ] && source "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh
 # FZF key-bindings
 [ -f "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/key-bindings.zsh ] && source "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/key-bindings.zsh
+
+alias luamake=/home/juanse/lua-language-server/3rd/luamake/luamake

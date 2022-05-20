@@ -17,7 +17,7 @@ set noerrorbells
 set number                      " Line numbers" 
 
 set encoding=utf-8
-set fileencoding=utf-8
+
 
 
 set nowrap                      " Display long lines as just one line
@@ -67,9 +67,13 @@ set shortmess+=c        " 	  c	don't give |ins-completion-menu| messages.  For e
 set nohlsearch
 set foldmethod=syntax
 
+" Stop auto commenting
+set formatoptions-=cro
+
+
 " ======================== Set Python 3 provider ================
 
-let g:python3_host_prog="/usr/local/bin/python3" 
+let g:python3_host_prog="/usr/bin/python3" 
 
 
 " ======================= Disable Python 2 plugin support ========
@@ -128,7 +132,12 @@ so $HOME/.config/nvim/mappings.vim
 lua << EOF
 
 local utils = require'utils'
+local _g  = vim.g
+
+-- _g.OmniSharp_start_server = 0
+_g.OmniSharp_highlighting = 0
 --local util = require'utils/map'
+_g.vimspector_enable_mappings = 'HUMAN'
 
 -- TODO: rename _inspect 
 -- wrapper for inspecting lua tables
