@@ -1,5 +1,10 @@
 #!/bin/sh
 
+if command -v i3 &>/dev/null;
+then
+  dropbox start &>/dev/null
+fi
+
 # Causes issues in Linux +Man, Man page exited with code 127
 if command -v apt &>/dev/null;
 then 
