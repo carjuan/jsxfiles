@@ -1,11 +1,11 @@
 #!/bin/bash
 
 apps=(
-  "alacritty -e htop" 
   "firefox"
+  "alacritty"
   "firefox https://notion.so https://calendar.google.com/calendar/u/O/r"
   "spotify"
-  "alacritty"
+  "alacritty -e htop" 
 )
 
 arrayLength=${#apps[@]}
