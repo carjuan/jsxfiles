@@ -153,12 +153,14 @@ so $HOME/.config/nvim/mappings.vim
 lua << EOF
 
 local utils = require'utils'
+local XDG_CONFIG_HOME = os.getenv('XDG_CONFIG_HOME')
 local _g  = vim.g
 
 -- _g.OmniSharp_start_server = 0
 _g.OmniSharp_highlighting = 0
 --local util = require'utils/map'
 _g.vimspector_enable_mappings = 'HUMAN'
+_g.vimspector_base_dir = XDG_CONFIG_HOME .. "/nvim/autoload/plugged/vimspector"
 
 -- TODO: rename _inspect 
 -- wrapper for inspecting lua tables
