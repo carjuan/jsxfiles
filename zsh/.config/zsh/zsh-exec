@@ -1,6 +1,6 @@
 #!/bin/sh
 
-UNAME_OUT = "$(uname -s)"
+UNAME_OUT="$(uname -s)"
 
 case "${UNAME_OUT}" in
   Linux*)
