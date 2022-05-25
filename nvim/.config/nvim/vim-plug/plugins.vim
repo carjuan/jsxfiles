@@ -78,6 +78,8 @@ Plug 'tpope/vim-scriptease'
 " Debugger
 Plug 'puremourning/vimspector'
 
+" Markdown
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 
 " Typing
 Plug 'tpope/vim-surround'
