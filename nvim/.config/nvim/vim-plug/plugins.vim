@@ -62,6 +62,8 @@ Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
 " ==========================================
 
+" ================= Search & Replace ==============
+Plug 'windwp/nvim-spectre'
 
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-buffer'
