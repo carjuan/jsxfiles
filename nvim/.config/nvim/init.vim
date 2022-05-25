@@ -88,7 +88,9 @@ set shortmess+=c        " 	  c	don't give |ins-completion-menu| messages.  For e
 set nohlsearch
 set foldmethod=syntax
 
-" Stop auto commenting
+set autochdir           "Change to the current file's directory
+
+                        " Stop auto commenting
 set formatoptions-=cro
 
 
