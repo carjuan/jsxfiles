@@ -90,6 +90,7 @@ set foldmethod=syntax
 
 set autochdir           "Change to the current file's directory
 
+set cursorcolumn        " Highlight column
                         " Stop auto commenting
 set formatoptions-=cro
 
