@@ -23,3 +23,8 @@ function tk() {
   local _pane="$1"
   tmux kill-pane -t "${_pane}"
 }
+
+function fcd() {
+  local _search_string="$1"
+  ll | grep "${_search_string}"
+}
