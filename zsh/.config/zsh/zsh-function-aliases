@@ -14,3 +14,12 @@ function ts() {
 
   tmux switch-client -t "${_session}"
 }
+
+function tka() {
+  tmux kill-pane -a -t 0
+}
+
+function tk() {
+  local _pane="$1"
+  tmux kill-pane -t "${_pane}"
+}
