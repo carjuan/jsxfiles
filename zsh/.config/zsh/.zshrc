@@ -66,8 +66,8 @@ bindkey '^F' autosuggest-accept
 compinit
 
 # Edit line in vim with ctrl-e:
-# autoload edit-command-line; zle -N edit-command-line
-# bindkey '^e' edit-command-line
+autoload edit-command-line; zle -N edit-command-line
+bindkey '^e' edit-command-line
 
 # Tmux developer workflows
 # Create a pane horizontally, $HOME directory, 50% width of current pane
