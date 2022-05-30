@@ -30,9 +30,10 @@ nnoremap <Leader>rts :lua require('JS/ts_css_parser'):get_sexpr()<CR>
 " Map <C-L> (redraw screen) to also turn off search highlighting until the next search
 nnoremap <Leader>nh :noh<CR>
 " command! -nargs=? Fold :call     CocAction('fold', <f-args>)
-command! -nargs=* -bar -bang -count=0 -complete=dir	Vex	call netrw#Explore(<count>,1,4+<bang>0,<q-args>)
+command! -nargs=* -bar -bang -count=0 -complete=dir	Vex	call netrw#Explore(<count>,1,4+<bang>0,<q-args>) <Bar> : vertical resize 30<CR>
 command! -nargs=0 So :source  
 command! -nargs=0 -bar -bang -count=0 Rlua :w | :luafile %
+nnoremap ve :Vex<CR>
 nnoremap <Leader>rl :Rlua<CR>
 nnoremap <Leader>nvim :vsp $iOME/.config/nvim/init.vim<CR>
 nnoremap <Leader>ip :PlugInstall<CR>
