@@ -165,6 +165,7 @@ _g.OmniSharp_highlighting = 0
 _g.vimspector_enable_mappings = 'HUMAN'
 _g.vimspector_base_dir = XDG_CONFIG_HOME .. "/nvim/autoload/plugged/vimspector"
 _g.mkdp_echo_preview_url = 1
+_g.netrw_liststyle = 3
 -- TODO: rename _inspect 
 -- wrapper for inspecting lua tables
 _G._inspect = utils.inspect
