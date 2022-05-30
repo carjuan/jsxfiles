@@ -46,10 +46,10 @@ nnoremap <Leader>rs :w <Bar> !./%
 nnoremap <Leader>. :echo expand('%:p')<CR>
 
 " Moving between panes
-nnoremap <C-h> <C-W>h
-nnoremap <C-j> <C-W>j
-nnoremap <C-k> <C-W>k
-nnoremap <C-l> <C-W>l
+nnoremap <C-h> :wincmd h<CR>
+nnoremap <C-j> :wincmd j<CR>
+nnoremap <C-k> :wincmd k<CR>
+nnoremap <C-l> :wincmd l<CR>
 
 " vimspector
 nnoremap <leader>da :call vimspector#Launch()<CR>
