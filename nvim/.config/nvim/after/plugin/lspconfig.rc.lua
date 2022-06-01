@@ -163,7 +163,7 @@ nvim_lsp.omnisharp.setup {
 nvim_lsp.bashls.setup {
   capabilities = capabilities,
   on_attach = on_custom_attach,
-  filetypes = { 'sh' },
+  filetypes = { 'sh', 'zsh' },
   handlers = {
     ["textDocument/publishDiagnostics"] = vim.lsp.with(
       vim.lsp.diagnostic.on_publish_diagnostics, {
