@@ -28,3 +28,9 @@ function fcd() {
   local _search_string="$1"
   ll | grep "${_search_string}"
 }
+
+# Find <word> in current files
+function ff(){
+  local _search_string="$1"
+  ll | grep "^-" | awk -F ' ' '{print $NF}' | xargs grep -n "${_search_string}"
+}
