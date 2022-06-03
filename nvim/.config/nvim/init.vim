@@ -86,9 +86,8 @@ set shortmess+=c        " 	  c	don't give |ins-completion-menu| messages.  For e
                         "Pattern not found", "Back at original", etc.
 
 set nohlsearch
-set foldmethod=syntax
+set foldmethod=manual
 
-set autochdir           "Change to the current file's directory
 
 set cursorcolumn        " Highlight column
                         " Stop auto commenting
