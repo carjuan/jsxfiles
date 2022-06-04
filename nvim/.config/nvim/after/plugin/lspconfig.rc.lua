@@ -208,6 +208,11 @@ nvim_lsp.sumneko_lua.setup {
 --vim_lsp.html.setup lspcon{
 -- capabilities = capabilities,
 --}
+nvim_lsp.jsonls.setup {
+  capabilities = capabilities,
+  on_attach = on_custom_attach,
+}
+
 nvim_lsp.diagnosticls.setup {
   capabilities = capabilities,
   on_attach = on_custom_attach,
