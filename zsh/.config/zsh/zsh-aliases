@@ -33,6 +33,9 @@ alias tmux='tmux -f $XDG_CONFIG_HOME/tmux/.tmux.conf'
 # Browser sync
 alias bss="browser-sync start --server --files '**/*.css, **/*.html, **/*.js, !node_modules/**/*' --directory --port 7777"
 
+# Lazygit
+alias lg="lazygit"
+
 # ----------------------
 # Git Aliases
 # ----------------------
