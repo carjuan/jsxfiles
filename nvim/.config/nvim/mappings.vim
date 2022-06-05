@@ -42,6 +42,9 @@ nnoremap <Leader>rif :w <Bar> so %<CR>
 nnoremap <Leader>rjs :w <Bar> !node %<CR>
 nnoremap <Leader>rs :w <Bar> !./%
 
+" Vim zoom
+nnoremap <C-W>z <Plug>(zoom-toggle)
+
 " Get absolute path of current file
 nnoremap <Leader>. :echo expand('%:p')<CR>
 

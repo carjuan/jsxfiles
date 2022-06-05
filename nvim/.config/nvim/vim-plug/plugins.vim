@@ -88,6 +88,9 @@ Plug 'puremourning/vimspector'
 " Markdown
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 
+" Vim zoom
+Plug 'dhruvasagar/vim-zoom'
+
 " Typing
 Plug 'tpope/vim-surround'
 Plug 'alvan/vim-closetag'
