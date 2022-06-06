@@ -83,8 +83,9 @@ Plug 'hrsh7th/cmp-path'
 Plug 'tpope/vim-scriptease'
 
 " Debugger
-Plug 'puremourning/vimspector'
-
+Plug 'mfussenegger/nvim-dap'
+Plug 'rcarriga/nvim-dap-ui'
+Plug 'theHamsta/nvim-dap-virtual-text'
 " Markdown
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 
