@@ -59,15 +59,15 @@ nnoremap <silent> <Leader>dl <Cmd>lua require'dap'.run_last()<CR>
 nnoremap <silent> <leader>dq :lua require'dapui'.toggle()<CR>
 
 " OmniSharp Plugin Server
-nnoremap od :OmniSharpDocumentation<CR>
-nnoremap ofm :OmniSharpFindMembers<CR>
-nnoremap ofs :OmniSharpFindSymbol
-nnoremap oft :OmniSharpFindType
-nnoremap ofr :OmniSharpFindUsages<CR>
-nnoremap oca :OmniSharpGetCodeActions
-nnoremap occ :OmniSharpGlobalCodeCheck<CR>
-nnoremap ogd :OmniSharpGotoDefinition split<CR>
-nnoremap opd :OmniSharpPreviewDefinition<CR>
+nnoremap <leader>ok :OmniSharpDocumentation<CR>
+nnoremap <leader>om :OmniSharpFindMembers<CR>
+nnoremap <leader>os :OmniSharpFindSymbol
+nnoremap <leader>ot :OmniSharpFindType
+nnoremap <leader>or :OmniSharpFindUsages<CR>
+nnoremap <leader>oa :OmniSharpGetCodeActions
+nnoremap <leader>oc :OmniSharpGlobalCodeCheck<CR>
+nnoremap <leader>od :OmniSharpGotoDefinition split<CR>
+nnoremap <leader>op :OmniSharpPreviewDefinition<CR>
 
 " Get absolute path of current file
 nnoremap <Leader>. :echo expand('%:p')<CR>
