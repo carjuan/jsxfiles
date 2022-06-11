@@ -21,6 +21,11 @@ case "${UNAME_OUT}" in
     else
       echo -e "No need to start dropbox" 
     fi
+
+    if pgrep tmux &>/dev/null;
+    then
+      tmux bind-key g popup -h 80% -w 80% -T lazygit -d "#{pane_current_path}" -E "lazygit"
+    fi
     # Adds  brew /bin to path
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
     ;;
