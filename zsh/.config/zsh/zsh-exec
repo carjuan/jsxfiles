@@ -21,6 +21,7 @@ case "${UNAME_OUT}" in
     else
       echo -e "No need to start dropbox" 
     fi
-
+    # Adds  brew /bin to path
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
     ;;
 esac
