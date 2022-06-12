@@ -1,7 +1,33 @@
 
+"
+"===== Allows tmux to control background color
+"===== if tmux is not the current terminal, then alacritty's
+"===== background color takes over
+"
 hi! Normal guibg=NONE ctermbg=NONE
 
+hi! EndOfBuffer guibg=NONE
+
+hi! SignColumn guibg=NONE
+
+hi! SignifySignAdd guibg=NONE
+
+hi! SignifySignChange guibg=NONE
+
+hi! SignifySignDelete guibg=NONE
+
+hi! LineNr guibg=NONE
+
+hi! DiffAdd guibg=NONE
+
+hi! DiffChange guibg=NONE
+
+hi! DiffDelete guibg=NONE
+
+hi! WinSeparator guifg=#ffffff guibg=#262626
 " =========== THEME SPECIFICS ===================
+" Adwaita 
+" hi! LineNr guifg=#b2b2b2
 "
 " SPACECAMP
 " Needed for spacecamp theme when <Normal hi = NONE>
