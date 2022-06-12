@@ -40,8 +40,6 @@ Plug 'JoosepAlviste/nvim-ts-context-commentstring'
 
 " Git Integration
 Plug 'tpope/vim-fugitive'
-Plug 'junegunn/gv.vim'
-" signify changes in Git file tracked files
 Plug 'mhinz/vim-signify'
 Plug 'tpope/vim-rhubarb'
 Plug 'sindrets/diffview.nvim'
@@ -72,6 +70,7 @@ Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-nvim-lua'
 Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/vim-vsnip'
 
 " ============ Motion ==========================
@@ -80,7 +79,6 @@ Plug 'easymotion/vim-easymotion'
 " Provides symbols/icons to LSP completion (nvim-cmp) sources
 Plug 'onsails/lspkind.nvim'
 "Plug 'saadparwaiz1/cmp_luasnip'
-Plug 'hrsh7th/cmp-path'
 " Making plugins
 Plug 'tpope/vim-scriptease'
 
