@@ -26,6 +26,13 @@ hi! DiffDelete guibg=NONE
 
 hi! WinSeparator guifg=#ffffff guibg=#262626
 " =========== THEME SPECIFICS ===================
+" SRCERY
+" 
+" Highlights only the number in cursor line
+hi! CursorLineNr guifg=#0AAEB3 guibg=NONE
+set cursorline
+set cursorlineopt=number
+"
 " Adwaita 
 " hi! LineNr guifg=#b2b2b2
 "
