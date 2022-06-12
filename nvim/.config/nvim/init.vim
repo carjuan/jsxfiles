@@ -89,7 +89,6 @@ set nohlsearch
 set foldmethod=manual
 
 
-set cursorcolumn        " Highlight column
                         " Stop auto commenting
 set formatoptions-=cro
 
@@ -111,6 +110,7 @@ let g:loaded_python_provider=0
 so $HOME/.config/nvim/vim-plug/plugins.vim
 
 runtime ./themes/set-theme.vim
+runtime ./utils/redir.vim
 " ==========================================================
 so $HOME/.config/nvim/mappings.vim
 "===========================================================
@@ -160,6 +160,9 @@ local _g  = vim.g
 
 -- _g.OmniSharp_start_server = 0
 _g.OmniSharp_highlighting = 0
+_g.srcery_italic = 1
+_g.adwaita_darker = true -- for darker version
+_g.adwaita_disable_cursorline = true -- to disable cursorline
 --local util = require'utils/map'
 _g.vimspector_enable_mappings = 'HUMAN'
 _g.vimspector_base_dir = XDG_CONFIG_HOME .. "/nvim/autoload/plugged/vimspector"
