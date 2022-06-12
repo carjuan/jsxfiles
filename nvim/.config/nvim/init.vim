@@ -46,8 +46,8 @@ set smartcase
 set noswapfile
 set incsearch
 set hlsearch!                   " Changes state of hlsearch to off
-set tabstop=2
-set softtabstop=2
+set tabstop=4
+set softtabstop=4
 set mouse=a                     " Enable your mouse 
 set splitbelow                  " Horizontal splits will automatically be below"
 set splitright                  " Vertical splits will automatically be to the right"
@@ -79,7 +79,7 @@ set cmdheight=2   " More space for displaying messages
 set signcolumn=yes
 set laststatus=3                " Always display the status line 
 set hidden      " Required to keep multiple buffers open multiple buffers
-set shiftwidth=2                " Change the number of space characters inserted for indentation
+set shiftwidth=4                " Change the number of space characters inserted for indentation
 
 set shortmess+=c        " 	  c	don't give |ins-completion-menu| messages.  For example,
                         "-- XXX completion (YYY)", "match 1 of 2", "The only match",
@@ -171,7 +171,6 @@ _g.netrw_liststyle = 3
 -- TODO: rename _inspect 
 -- wrapper for inspecting lua tables
 _G._inspect = utils.inspect
-
 -- wrapper for vim.api.nvim_set_keymap
 --local ts = require'nvim-treesitter.configs'
 --ts.setup { 
