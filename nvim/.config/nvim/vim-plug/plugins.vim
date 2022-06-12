@@ -12,12 +12,14 @@ call plug#begin('~/.config/nvim/autoload/plugged')
 Plug 'rktjmp/lush.nvim'
 
 " ================ COLORSCHEMES ==========
-Plug '~/.config/nvim/themes/colorthemes/gruvy'
-Plug 'whatyouhide/vim-gotham', { 'dir': '~/.config/nvim/themes/colorthemes/gotham'}
-Plug 'sainnhe/everforest', { 'dir': '~/.config/nvim/themes/colorthemes/everforest'} 
+" Plug '~/.config/nvim/themes/colorthemes/gruvy'
+" Plug 'whatyouhide/vim-gotham', { 'dir': '~/.config/nvim/themes/colorthemes/gotham'}
+" Plug 'sainnhe/everforest', { 'dir': '~/.config/nvim/themes/colorthemes/everforest'} 
 Plug 'ellisonleao/gruvbox.nvim', { 'dir': '~/.config/nvim/themes/colorthemes/gruvbox'}
-Plug 'jaredgorski/spacecamp', { 'dir': '~/.config/nvim/themes/colorthemes/spacecamp'}
-Plug 'challenger-deep-theme/vim', { 'dir': '~/.config/nvim/themes/colorthemes/challenger-deep', 'name': 'challenger-deep-theme' }
+" Plug 'jaredgorski/spacecamp', { 'dir': '~/.config/nvim/themes/colorthemes/spacecamp'}
+" Plug 'challenger-deep-theme/vim', { 'dir': '~/.config/nvim/themes/colorthemes/challenger-deep', 'name': 'challenger-deep-theme' }
+Plug 'srcery-colors/srcery-vim'
+Plug 'Mofiqul/adwaita.nvim'
 "  ==================================
 
 " ======== Find and Replace =======
