@@ -1,4 +1,3 @@
-
 "
 "===== Allows tmux to control background color
 "===== if tmux is not the current terminal, then alacritty's
@@ -25,11 +24,13 @@ hi! DiffChange guibg=NONE
 hi! DiffDelete guibg=NONE
 
 hi! WinSeparator guifg=#ffffff guibg=#262626
+
+hi! Visual cterm=reverse gui=reverse
 " =========== THEME SPECIFICS ===================
-" SRCERY
+" Gruvbox
 " 
 " Highlights only the number in cursor line
-hi! CursorLineNr guifg=#0AAEB3 guibg=NONE
+hi! CursorLineNr guifg=#ff8700 guibg=NONE
 set cursorline
 set cursorlineopt=number
 "

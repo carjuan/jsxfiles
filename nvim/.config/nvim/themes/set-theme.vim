@@ -1,7 +1,7 @@
 set background=dark
 let g:gruvbox_contrast_dark = 'dark'
 
-colorscheme srcery
+colorscheme adwaita
 color js
 
 " colorscheme spacecamp
