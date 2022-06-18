@@ -35,7 +35,8 @@ command! -nargs=0 So :source
 command! -nargs=0 -bar -bang -count=0 Rlua :w | :luafile %
 nnoremap ve :Vex<CR>
 nnoremap <Leader>rl :Rlua<CR>
-nnoremap <Leader>nvim :vsp $iOME/.config/nvim/init.vim<CR>
+nnoremap <Leader>nvim :vsp $HOME/.config/nvim/init.vim<CR>
+nnoremap <leader>s :/\<search-string>\>
 nnoremap <Leader>ip :PlugInstall<CR>
 nnoremap <Leader>db :bdelete<CR>
 nnoremap <Leader>rif :w <Bar> so %<CR>
