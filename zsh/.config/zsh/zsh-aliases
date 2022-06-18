@@ -28,7 +28,7 @@ alias pscpu='ps auxf | sort -nr -k 3 | head -5'
 alias gital='cat $ZDOTDIR/zsh-aliases | tail -21'
 
 # Start Tmux with $XDG_CONFIG_HOME/tmux/*.tmux.conf
-alias tmux='tmux -f $XDG_CONFIG_HOME/tmux/.tmux.conf' 
+alias tmux="tmux -f $XDG_CONFIG_HOME/tmux/.tmux.conf"
 
 # Browser sync
 alias bss="browser-sync start --server --files '**/*.css, **/*.html, **/*.js, !node_modules/**/*' --directory --port 7777"
