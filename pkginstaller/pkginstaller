@@ -267,6 +267,7 @@ install_pkgs() {
     if ! ${config[pkg_manager]} info "$pkg" > /dev/null 2>&1; then err "$pkg not a valid package"; fi
   done
   
+  # TODO: could use eval ?
   ${config[pkg_manager]} ${config[action]} ${config[_packages]}
 
 }
