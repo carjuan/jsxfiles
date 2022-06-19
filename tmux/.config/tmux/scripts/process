@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 source "${XDG_CONFIG_HOME}/.config/tmux/scripts/utils"
 
 FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS --header='Select the process to kill'"
