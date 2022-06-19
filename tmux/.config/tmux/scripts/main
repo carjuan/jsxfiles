@@ -26,7 +26,7 @@ tmux_session_env[FZF_TMUX_BIN]="${CURRENT_DIR}/.fzf-tmux"
 # Healthy checks
 tmux_version=$(tmux -V | grep -oE '[0-9]+\.[0-9]*')
 if [ $(compare_float $tmux_version "3.1") == ">" ]; then
-  tmux_session_env[TMUX_FZF_OPTIONS]="-p -w 40% -h 38% -m"
+  tmux_session_env[TMUX_FZF_OPTIONS]="-p -w 60% -h 50% -m"
 else
   tmux_session_env[TMUX_FZF_OPTIONS]="-m"
 fi
