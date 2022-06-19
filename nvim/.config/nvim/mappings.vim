@@ -42,6 +42,7 @@ nnoremap <Leader>db :bdelete<CR>
 nnoremap <Leader>rif :w <Bar> so %<CR>
 nnoremap <Leader>rjs :w <Bar> !node %<CR>
 nnoremap <Leader>rs :w <Bar> !./%
+nnoremap <leader>rt :w <Bar> edit <Bar> TSBufEnable highlight<CR>
 
 " Vim zoom
 nnoremap <C-W>z <Plug>(zoom-toggle)
