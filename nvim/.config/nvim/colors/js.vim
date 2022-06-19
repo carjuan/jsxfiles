@@ -35,7 +35,7 @@ set cursorline
 set cursorlineopt=number
 "
 " Adwaita 
-" hi! LineNr guifg=#b2b2b2
+hi! TelescopeSelection cterm=reverse gui=reverse
 "
 " SPACECAMP
 " Needed for spacecamp theme when <Normal hi = NONE>
