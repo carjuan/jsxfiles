@@ -6,6 +6,7 @@ apps=(
   "firefox https://notion.so https://calendar.google.com/calendar/u/O/r"
   "spotify"
   "alacritty -e htop" 
+  "stretchly"
 )
 
 arrayLength=${#apps[@]}
@@ -18,7 +19,4 @@ do
 
   i3-msg "workspace ${workspaceNumber}; exec ${apps[$i]}" && sleep ${workspaceNumber}
 
- 
-
 done
-
