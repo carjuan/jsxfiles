@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 apps=(
   "firefox"
@@ -15,8 +15,12 @@ for (( i=0; i<${arrayLength}; i++));
 do
   # echo "index: ${workspaceNum}; value: ${apps[$i]}"
 
-  workspaceNumber=$(($i + 1))
+    workspaceNumber=$(($i + 1))
 
-  i3-msg "workspace ${workspaceNumber}; exec ${apps[$i]}" && sleep ${workspaceNumber}
-
+    if [ "${apps[$i]}" = "stretchly" ];
+    then 
+        i3-msg "exec ${apps[$i]}"
+    else
+        i3-msg "workspace ${workspaceNumber}; exec ${apps[$i]}" && sleep ${workspaceNumber} 
+    fi
 done
