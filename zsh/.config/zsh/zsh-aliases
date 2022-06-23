@@ -36,9 +36,6 @@ alias bss="browser-sync start --server --files '**/*.css, **/*.html, **/*.js, !n
 # Lazygit
 alias lg="lazygit"
 
-# Stretchly
-alias stretchly="cd $HOME/strechly* && nohup pnpm run start &>/dev/null & disown"
-
 # ----------------------
 # Git Aliases
 # ----------------------
