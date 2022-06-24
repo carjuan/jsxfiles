@@ -7,6 +7,6 @@ states="session|window|pane|process|run"
 
 target_state=$(printf "[cancel]\n%s" "$states" | tr "|" "\n" | eval "$FZF_TMUX_BIN $TMUX_FZF_OPTIONS")
 
-[[ "$target_state" == "[Cancel]" || -z "$target_state" ]] && exit
+[[ "$target_state" == "[cancel]" || -z "$target_state" ]] && exit
 
 eval "${CURRENT_DIR}/$target_state"
