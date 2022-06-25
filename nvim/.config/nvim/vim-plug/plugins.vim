@@ -54,6 +54,7 @@ Plug 'folke/trouble.nvim'
 "
 " =============== C# =========================
 Plug 'OmniSharp/omnisharp-vim'
+Plug 'jlcrochet/vim-razor'
 
 " ================ Telescope ================
 Plug 'nvim-lua/popup.nvim'
