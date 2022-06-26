@@ -84,6 +84,7 @@ set shiftwidth=4                " Change the number of space characters inserted
 set shortmess+=c        " 	  c	don't give |ins-completion-menu| messages.  For example,
                         "-- XXX completion (YYY)", "match 1 of 2", "The only match",
                         "Pattern not found", "Back at original", etc.
+set winbar=%=%r%m%w\ %L\ lines\ in:\ %f
 
 set nohlsearch
 set foldmethod=manual
