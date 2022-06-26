@@ -26,6 +26,10 @@ hi! DiffDelete guibg=NONE
 hi! WinSeparator guifg=#ffffff guibg=#262626
 
 hi! Visual cterm=reverse gui=reverse
+
+" See h: statusline for formatting
+hi! OwnWinBar cterm=underline ctermfg=11 gui=bold guifg=#121212 guibg=#ff8700 
+
 " =========== THEME SPECIFICS ===================
 " Gruvbox
 " 
