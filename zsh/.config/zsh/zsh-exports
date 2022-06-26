@@ -33,6 +33,9 @@ export FZF_DEFAULT_OPTS='
 # Go
 export PATH="${HOME}/go/bin:$PATH"
 
+# Alacritty
+export PKG_CONFIG_PATH=/usr/lib/x86_64-linux-gnu/pkgconfig
+
 # for zsh viins to work jj 'vi-cmd-mode'
 export KEYTIMEOUT=15
 
