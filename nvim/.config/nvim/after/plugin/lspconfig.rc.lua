@@ -72,7 +72,7 @@ local on_custom_attach = function(client, bufnr)
     vim.keymap.set("n", "ff", vim.lsp.buf.formatting, opts)
 
     --formatting
-    if client.resolved_capabilities.document_formatting then
+    if client.server_capabilities.document_formatting then
         vim.api.nvim_command [[augroup Format]]
         vim.api.nvim_command [[autocmd! * <buffer>]]
         vim.api.nvim_command [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()]]
@@ -129,7 +129,7 @@ local disable_formatting = function(client, bufnr)
 
 
     if current_buf_file_extension == file_extension then
-        client.resolved_capabilities.document_formatting = false
+        client.server_capabilities.document_formatting = false
     end
 
     on_custom_attach(client, bufnr)
