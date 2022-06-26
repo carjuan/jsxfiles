@@ -32,17 +32,15 @@ nnoremap <Leader>nh :noh<CR>
 " command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 command! -nargs=* -bar -bang -count=0 -complete=dir	Vex	call netrw#Explore(<count>,1,4+<bang>0,<q-args>) <Bar> : vertical resize 30<CR>
 command! -nargs=0 So :source  
-command! -nargs=0 -bar -bang -count=0 Rlua :w | :luafile %
 nnoremap ve :Vex<CR>
-nnoremap <Leader>rl :Rlua<CR>
 nnoremap <Leader>nvim :vsp $HOME/.config/nvim/init.vim<CR>
 nnoremap <leader>s :/\<search-string>\>
-nnoremap <Leader>ip :PlugInstall<CR>
+nnoremap <Leader>pi :PlugInstall<CR>
+nnoremap <Leader>pu :PlugUpdate<CR>
 nnoremap <Leader>db :bdelete<CR>
 nnoremap <Leader>rif :w <Bar> so %<CR>
-nnoremap <Leader>rjs :w <Bar> !node %<CR>
-nnoremap <Leader>rs :w <Bar> !./%
 nnoremap <leader>rt :w <Bar> edit <Bar> TSBufEnable highlight<CR>
+nnoremap <leader>rc :Runcmd
 
 " Vim zoom
 nnoremap <C-W>z <Plug>(zoom-toggle)

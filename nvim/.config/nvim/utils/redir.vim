@@ -27,6 +27,16 @@ function! Redir(cmd, rng, start, end)
 	call setline(1, output)
 endfunction
 
+fun! Runcmd(cmd)
+    silent! exe "noautocmd botright pedit ".a:cmd
+    noautocmd wincmd P
+    set buftype=nofile
+    exe "noautocmd r! ".a:cmd
+    noautocmd wincmd p
+endfun
+
+command! -nargs=1 Runcmd :call Runcmd("<args>")
+
 " This command definition includes -bar, so that it is possible to "chain" Vim commands.
 " Side effect: double quotes can't be used in external commands
 command! -nargs=1 -complete=command -bar -range Redir silent call Redir(<q-args>, <range>, <line1>, <line2>)
