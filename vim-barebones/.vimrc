@@ -18,8 +18,9 @@
 "
 " =======================================================================================================================================
 
+
+inoremap jj <esc>
                                                                                                                                            
-                                                                                                                                            
 let mapleader=" " 
 
 filetype plugin indent on
@@ -32,14 +33,12 @@ set iskeyword+=-                 " Treat dash seperated words as a word text obj
 set matchpairs+=<:>
 
 set nocompatible
-set noshowmode                  " We don't need to see things like -- INSERT -- anymore
 set termguicolors 
 set noerrorbells
 
 set number                      " Line numbers" 
-
 set encoding=utf-8
-
+set noshowmode
 
 
 set nowrap                      " Display long lines as just one line
@@ -102,3 +101,30 @@ let g:python3_host_prog="/usr/bin/python3"
 " ======================= Disable Python 2 plugin support ========
 
 let g:loaded_python_provider=0
+
+" Use a line cursor within insert mode and a block cursor everywhere else.
+"
+" Reference chart of values:
+"   Ps = 0  -> blinking block.
+"   Ps = 1  -> blinking block (default).
+"   Ps = 2  -> steady block.
+"   Ps = 3  -> blinking underline.
+"   Ps = 4  -> steady underline.
+"   Ps = 5  -> blinking bar (xterm).
+"   Ps = 6  -> steady bar (xterm).
+let &t_SI = "\e[5 q"
+let &t_EI = "\e[2 q"
+
+" =========== THEME SPECIFICS ===================
+" Gruvbox
+" 
+" Highlights only the number in cursor line
+hi! CursorLineNr guifg=#ff8700 guibg=NONE
+set cursorline
+set cursorlineopt=number
+
+" prevent typo when pressing `wq` or `q`
+cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W'))
+cnoreabbrev <expr> Q ((getcmdtype() is# ':' && getcmdline() is# 'Q')?('q'):('Q'))
+cnoreabbrev <expr> WQ ((getcmdtype() is# ':' && getcmdline() is# 'WQ')?('wq'):('WQ'))
+cnoreabbrev <expr> Wq ((getcmdtype() is# ':' && getcmdline() is# 'Wq')?('wq'):('Wq'))
