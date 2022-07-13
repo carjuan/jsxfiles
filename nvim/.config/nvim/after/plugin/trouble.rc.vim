@@ -1,5 +1,7 @@
 lua << EOF
 
-require'trouble'.setup{}
+require'trouble'.setup{
+    mode = "document_diagnostics",
+}
 
 EOF

@@ -6,6 +6,7 @@ local sumneko_lua = luaserver()
 local pid = vim.fn.getpid()
 
 
+
 -- TODO: require a wrapper for cmp and update capabilities in TSSERVER
 --require'cmp'.setup {
 --  sources = {
@@ -45,18 +46,22 @@ local on_custom_attach = function(client, bufnr)
     vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
 
     -- find diagnostics for current buffer only
-    vim.keymap.set('n', 'da', function()
-        require('telescope.builtin').diagnostics({ bufnr = 0 })
-        print("Showed diagnostics for current buffer only")
-    end, opts)
+    -- vim.keymap.set('n', 'da', function()
+    --     require('telescope.builtin').diagnostics({ bufnr = 0 })
+    --     print("Showed diagnostics for current buffer only")
+    -- end, opts)
 
     -- find diagnostics for workspace <cwd>
-    vim.keymap.set('n', 'dA', function()
-        require('telescope.builtin').diagnostics()
-        print("Showed diagnostics for current buffer only")
-    end, opts)
+    -- vim.keymap.set('n', 'dA', function()
+    --     require('telescope.builtin').diagnostics()
+    --     print("Showed diagnostics for current buffer only")
+    -- end, opts)
+    --
+    -- Trouble diagnostics
+    vim.keymap.set('n', 'da', '<cmd>TroubleToggle<CR>', opts)
+    vim.keymap.set('n', 'xq', '<cmd>TroubleToggle quickfix<CR>', opts)
+    vim.keymap.set('n', 'fr', '<cmd>Trouble lsp_references<CR>', opts)
 
-    vim.keymap.set('n', 'fr', '<cmd>Telescope lsp_references<CR>', opts)
     vim.keymap.set('n', 'fd', '<cmd>Telescope lsp_definitions<CR>', opts)
     vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
     vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = 0 }, opts)
@@ -68,7 +73,7 @@ local on_custom_attach = function(client, bufnr)
     vim.keymap.set('n', 'gt', vim.lsp.buf.type_definition, opts)
     vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
     vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, opts)
-    vim.keymap.set('n', '<space>q', vim.lsp.diagnostic.set_loclist, opts)
+    vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
     vim.keymap.set("n", "ff", vim.lsp.buf.formatting, opts)
 
     --formatting
@@ -143,34 +148,26 @@ nvim_lsp.tsserver.setup {
     on_attach = disable_formatting,
     filetypes = { 'javascript', 'typescript', 'typescriptreact', 'typescript.tsx' },
     -- if handlers is enable, customizes diagnositcs in buffer, disables icons and underline
-    handlers = {
-        ["textDocument/publishDiagnostics"] = vim.lsp.with(
-            vim.lsp.diagnostic.on_publish_diagnostics, {
-            underline = false,
-            signs = false
-        }
-        )
-    },
+    -- handlers = {
+    --     ["textDocument/publishDiagnostics"] = vim.lsp.with(
+    --         vim.lsp.diagnostic.on_publish_diagnostics, {
+    --         underline = false,
+    --         signs = false
+    --     }
+    --     )
+    -- },
 }
 
 nvim_lsp.omnisharp.setup {
     capabilities = capabilities,
     on_attach = on_custom_attach,
-    cmd = { string.format("%s/.cache/omnisharp-vim/omnisharp-roslyn/run", home), "--languageserver", "--hostPID", tostring(pid) },
+    cmd = { string.format("%s/.cache/omnisharp-vim/omnisharp-roslyn/OmniSharp", home), "--languageserver", "--hostPID", tostring(pid) },
 }
 
 nvim_lsp.bashls.setup {
     capabilities = capabilities,
     on_attach = on_custom_attach,
     filetypes = { 'sh', 'zsh' },
-    handlers = {
-        ["textDocument/publishDiagnostics"] = vim.lsp.with(
-            vim.lsp.diagnostic.on_publish_diagnostics, {
-            underline = false,
-            signs = false
-        }
-        )
-    },
 }
 
 
@@ -273,14 +270,26 @@ nvim_lsp.diagnosticls.setup {
 
 -- icon for diagnostics
 
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-    vim.lsp.diagnostic.on_publish_diagnostics, {
-    underline = false,
-    -- This sets the spacing and the prefix, obviously.
-    signs = false,
-    virtual_text = {
-        spacing = 4,
-        prefix = ''
-    }
-}
-)
+vim.diagnostic.config({
+    virtual_text = false,
+    signs = true,
+    underline = true,
+    update_in_insert = true,
+    severity_sort = true,
+})
+local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+for type, icon in pairs(signs) do
+  local hl = "DiagnosticSign" .. type
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+end
+-- vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+--     vim.lsp.diagnostic.on_publish_diagnostics, {
+--     underline = false,
+--     -- This sets the spacing and the prefix, obviously.
+--     signs = false,
+--     virtual_text = {
+--         spacing = 4,
+--         prefix = ''
+--     }
+-- }
+-- )

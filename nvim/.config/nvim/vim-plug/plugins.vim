@@ -20,6 +20,7 @@ Plug 'ellisonleao/gruvbox.nvim', { 'dir': '~/.config/nvim/themes/colorthemes/gru
 " Plug 'challenger-deep-theme/vim', { 'dir': '~/.config/nvim/themes/colorthemes/challenger-deep', 'name': 'challenger-deep-theme' }
 Plug 'srcery-colors/srcery-vim'
 Plug 'Mofiqul/adwaita.nvim'
+Plug 'folke/lsp-colors.nvim'
 "  ==================================
 
 " ======== Find and Replace =======

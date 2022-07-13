@@ -76,7 +76,7 @@ set ignorecase
 set smartcase
 set confirm 
 set cmdheight=2   " More space for displaying messages
-set signcolumn=yes
+set signcolumn=auto:6
 set laststatus=3                " Always display the status line 
 set hidden      " Required to keep multiple buffers open multiple buffers
 set shiftwidth=4                " Change the number of space characters inserted for indentation
@@ -162,6 +162,7 @@ local _g  = vim.g
 
 -- _g.OmniSharp_start_server = 0
 _g.OmniSharp_highlighting = 0
+_g.OmniSharp_server_use_net6 = 1
 _g.srcery_italic = 1
 _g.adwaita_darker = true -- for darker version
 _g.adwaita_disable_cursorline = true -- to disable cursorline
