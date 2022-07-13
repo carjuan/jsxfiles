@@ -76,7 +76,7 @@ set ignorecase
 set smartcase
 set confirm 
 set cmdheight=2   " More space for displaying messages
-set signcolumn=auto:3
+set signcolumn=yes:2
 set laststatus=3                " Always display the status line 
 set hidden      " Required to keep multiple buffers open multiple buffers
 set shiftwidth=4                " Change the number of space characters inserted for indentation
