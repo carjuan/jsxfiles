@@ -77,7 +77,7 @@ local on_custom_attach = function(client, bufnr)
     vim.keymap.set("n", "ff", vim.lsp.buf.formatting, opts)
 
     --formatting
-    if client.resolved_capabilities.document_formatting then
+    if client.server_capabilities.documentFormattingProvider then
         vim.api.nvim_create_autocmd("BufWritePre", {
             buffer = bufnr,
             callback = function()
@@ -275,14 +275,14 @@ nvim_lsp.diagnosticls.setup {
 vim.diagnostic.config({
     virtual_text = false,
     signs = true,
-    underline = true,
+    underline = false,
     update_in_insert = true,
     severity_sort = true,
 })
 local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
 for type, icon in pairs(signs) do
-  local hl = "DiagnosticSign" .. type
-  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+    local hl = "DiagnosticSign" .. type
+    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
 -- vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 --     vim.lsp.diagnostic.on_publish_diagnostics, {
