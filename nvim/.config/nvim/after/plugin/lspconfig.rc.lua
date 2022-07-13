@@ -147,14 +147,14 @@ nvim_lsp.tsserver.setup {
     on_attach = disable_formatting,
     filetypes = { 'javascript', 'typescript', 'typescriptreact', 'typescript.tsx' },
     -- if handlers is enable, customizes diagnositcs in buffer, disables icons and underline
-    handlers = {
-        ["textDocument/publishDiagnostics"] = vim.lsp.with(
-            vim.lsp.diagnostic.on_publish_diagnostics, {
-            underline = false,
-            signs = false
-        }
-        )
-    },
+    -- handlers = {
+    --     ["textDocument/publishDiagnostics"] = vim.lsp.with(
+    --         vim.lsp.diagnostic.on_publish_diagnostics, {
+    --         underline = false,
+    --         signs = false
+    --     }
+    --     )
+    -- },
 }
 
 nvim_lsp.omnisharp.setup {
@@ -167,14 +167,6 @@ nvim_lsp.bashls.setup {
     capabilities = capabilities,
     on_attach = on_custom_attach,
     filetypes = { 'sh', 'zsh' },
-    handlers = {
-        ["textDocument/publishDiagnostics"] = vim.lsp.with(
-            vim.lsp.diagnostic.on_publish_diagnostics, {
-            underline = false,
-            signs = false
-        }
-        )
-    },
 }
 
 
@@ -277,14 +269,26 @@ nvim_lsp.diagnosticls.setup {
 
 -- icon for diagnostics
 
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-    vim.lsp.diagnostic.on_publish_diagnostics, {
-    underline = false,
-    -- This sets the spacing and the prefix, obviously.
-    signs = false,
-    virtual_text = {
-        spacing = 4,
-        prefix = ''
-    }
-}
-)
+vim.diagnostic.config({
+    virtual_text = false,
+    signs = true,
+    underline = true,
+    update_in_insert = true,
+    severity_sort = true,
+})
+local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+for type, icon in pairs(signs) do
+  local hl = "DiagnosticSign" .. type
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+end
+-- vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+--     vim.lsp.diagnostic.on_publish_diagnostics, {
+--     underline = false,
+--     -- This sets the spacing and the prefix, obviously.
+--     signs = false,
+--     virtual_text = {
+--         spacing = 4,
+--         prefix = ''
+--     }
+-- }
+-- )
