@@ -162,6 +162,7 @@ local _g  = vim.g
 
 -- _g.OmniSharp_start_server = 0
 _g.OmniSharp_highlighting = 0
+_g.OmniSharp_server_use_net6 = 1
 _g.srcery_italic = 1
 _g.adwaita_darker = true -- for darker version
 _g.adwaita_disable_cursorline = true -- to disable cursorline

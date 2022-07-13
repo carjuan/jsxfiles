@@ -6,6 +6,7 @@ local sumneko_lua = luaserver()
 local pid = vim.fn.getpid()
 
 
+
 -- TODO: require a wrapper for cmp and update capabilities in TSSERVER
 --require'cmp'.setup {
 --  sources = {
@@ -160,7 +161,7 @@ nvim_lsp.tsserver.setup {
 nvim_lsp.omnisharp.setup {
     capabilities = capabilities,
     on_attach = on_custom_attach,
-    cmd = { string.format("%s/.cache/omnisharp-vim/omnisharp-roslyn/run", home), "--languageserver", "--hostPID", tostring(pid) },
+    cmd = { string.format("%s/.cache/omnisharp-vim/omnisharp-roslyn/OmniSharp", home), "--languageserver", "--hostPID", tostring(pid) },
 }
 
 nvim_lsp.bashls.setup {
