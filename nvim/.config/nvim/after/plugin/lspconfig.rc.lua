@@ -72,7 +72,7 @@ local on_custom_attach = function(client, bufnr)
     vim.keymap.set('n', 'gt', vim.lsp.buf.type_definition, opts)
     vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
     vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, opts)
-    vim.keymap.set('n', '<space>q', vim.lsp.diagnostic.set_loclist, opts)
+    vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
     vim.keymap.set("n", "ff", vim.lsp.buf.formatting, opts)
 
     --formatting
