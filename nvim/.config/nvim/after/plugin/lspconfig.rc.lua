@@ -45,18 +45,22 @@ local on_custom_attach = function(client, bufnr)
     vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
 
     -- find diagnostics for current buffer only
-    vim.keymap.set('n', 'da', function()
-        require('telescope.builtin').diagnostics({ bufnr = 0 })
-        print("Showed diagnostics for current buffer only")
-    end, opts)
+    -- vim.keymap.set('n', 'da', function()
+    --     require('telescope.builtin').diagnostics({ bufnr = 0 })
+    --     print("Showed diagnostics for current buffer only")
+    -- end, opts)
 
     -- find diagnostics for workspace <cwd>
-    vim.keymap.set('n', 'dA', function()
-        require('telescope.builtin').diagnostics()
-        print("Showed diagnostics for current buffer only")
-    end, opts)
+    -- vim.keymap.set('n', 'dA', function()
+    --     require('telescope.builtin').diagnostics()
+    --     print("Showed diagnostics for current buffer only")
+    -- end, opts)
+    --
+    -- Trouble diagnostics
+    vim.keymap.set('n', 'da', '<cmd>TroubleToggle<CR>', opts)
+    vim.keymap.set('n', 'xq', '<cmd>TroubleToggle quickfix<CR>', opts)
+    vim.keymap.set('n', 'fr', '<cmd>Trouble lsp_references<CR>', opts)
 
-    vim.keymap.set('n', 'fr', '<cmd>Telescope lsp_references<CR>', opts)
     vim.keymap.set('n', 'fd', '<cmd>Telescope lsp_definitions<CR>', opts)
     vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
     vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = 0 }, opts)
