@@ -74,14 +74,14 @@ local on_custom_attach = function(client, bufnr)
     vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
     vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, opts)
     vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
-    vim.keymap.set("n", "ff", vim.lsp.buf.formatting, opts)
+    vim.keymap.set("n", "ff", function() vim.lsp.buf.format({ async = true }) end, opts)
 
     --formatting
     if client.server_capabilities.documentFormattingProvider then
         vim.api.nvim_create_autocmd("BufWritePre", {
             buffer = bufnr,
             callback = function()
-                vim.lsp.buf.format()
+                vim.lsp.buf.format({ async = true })
             end
         })
     end
