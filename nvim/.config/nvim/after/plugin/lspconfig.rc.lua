@@ -52,10 +52,10 @@ local on_custom_attach = function(client, bufnr)
     -- end, opts)
 
     -- find diagnostics for workspace <cwd>
-    -- vim.keymap.set('n', 'dA', function()
-    --     require('telescope.builtin').diagnostics()
-    --     print("Showed diagnostics for current buffer only")
-    -- end, opts)
+    vim.keymap.set('n', '<space>td', function()
+        require('telescope.builtin').diagnostics()
+        print("Showed diagnostics for current buffer only")
+    end, opts)
     --
     -- Trouble diagnostics
     vim.keymap.set('n', 'da', '<cmd>TroubleToggle<CR>', opts)
